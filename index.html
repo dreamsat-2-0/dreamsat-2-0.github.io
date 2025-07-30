@@ -1,246 +1,429 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-	<head>
-		<title>Phantom by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+    <title>DreamSat 2.0</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <!-- Include Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/OBJLoader.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
-				<!-- Header -->
-					<header id="header">
-						<div class="inner">
+</head>
+<body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-							<!-- Logo -->
-								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Phantom</span>
-								</a>
+        <!-- Main -->
+        <div id="main" style="text-align: center;">
+            <div class="inner">
+                <header style="padding-top: 5em">
+                    <h1>DreamSat: Towards a General Single-View Asteroid 3D Reconstruction</h1>
+                </header>
+                <section id="authors" class="container" style="text-align: center;">
+                    <h2>Authors</h2>
+                    <div class="author-list"> 
+                        <a href="" target="_blank">Santiago Diaz</a><sup>1,4</sup>, 
+                        <a href="https://www.linkedin.com/in/audrey-wei-17a0b2222/" target="_blank">Xinghui Hu</a><sup>2,4</sup>, 
+						<a href="https://www.linkedin.com/in/audrey-wei-17a0b2222/" target="_blank">Josiane Uwumukiza</a><sup>3,4</sup>, 
+                        <a href="https://scholar.google.com/citations?user=GeXWF3UAAAAJ&hl=en" target="_blank">Giovanni Lavezzi</a><sup>2</sup>, 
+                        <a href="https://scholar.google.com/citations?hl=en&user=P1yxTEsAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Victor Rodriguez-Fernandez</a><sup>1</sup>,
+                        <a href="https://scholar.google.com/citations?user=aYKGTXoAAAAJ&hl=en&oi=ao" target="_blank">Richard Linares</a><sup>2</sup>
+                    </div>
+                    <p class="subtitle is-5"> 
+                        <sup>1</sup> Universidad Politécnica de Madrid &nbsp;
+						<sup>2</sup> Massachusetts Institute of Technology &nbsp;
+						<sup>3</sup> Wellesley College &nbsp;
+                        <sup>4</sup> Equal contribution
+                    </p>
+                </section>
+                <div class="container" style="text-align: center;">
+                    <a href="https://arxiv.org/abs/2410.05097" class="button large">Paper</a>
+                    <a href="https://github.com/ARCLab-MIT/space-nvs" class="button large">Code</a>
+                </div>
+                <header style="padding-top: 1em"></header>
+                <section id="abstract" class="container">
+                    <h2>Abstract</h2>
+                    <p>3D reconstruction offers significant potential for enhancing asteroid exploration and autonomous spacecraft navigation. In this work, we introduce DreamSat-2.0, a pipeline integrating three state-of-the-art models—Hunyuan-3D, Trellis-3D, and Ouroboros-3D—and conduct a comparative analysis on custom spacecraft and asteroid datasets using a suite of 2D and 3D metrics. New benchmarks are established over previous DreamSat framework, which demonstrated a relative gain (+2.53\% PSNR). This study sets a new performance standard, with Hunyuan-3D achieving top scores (20.93 PSNR, 0.9291 SSIM, 0.1124 LPIPS) on spacecraft but its best geometric accuracy on asteroids (0.5619 IoU). This reveals that performance is domain-dependent.</p>
+                </section>
 
-							<!-- Nav -->
-								<nav>
-									<ul>
-										<li><a href="#menu">Menu</a></li>
-									</ul>
-								</nav>
+                <!-- Images section -->
+                <section id="images" class="container">
+                    <h2>Input</h2>
+                    <div class="row">
+                        <div class="col-4 col-12-medium">
+                            <section class="first">
+                                <img src="images/explorer1.png" alt="Explorer" />
+                                <header>
+                                    <h2>Explorer 1</h2>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <section class="middle">
+                                <img src="images/lunarlandernofoil-carbajal.png" alt="Apollo" />
+                                <header>
+                                    <h2>Apollo Lunar Module</h2>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <section class="last">
+                                <img src="images/sls_block1.png" alt="Launch System" />
+                                <header>
+                                    <h2>Space Launch System Block 1</h2>
+                                </header>
+                            </section>
+                        </div>
+                    </div>
+                </section>
 
-						</div>
-					</header>
+                <!-- Videos section -->
+                <section id="videos" class="container">
+                    <h2>Generated Novel Views</h2>
+                    <div class="row">
+                        <div class="col-4 col-12-medium">
+                            <section class="first">
+                                <img src="videos/explorer1.gif" alt="Explorer 1" width="100%">
+                                <header>
+                                    <h2>Explorer 1</h2>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <section class="middle">
+                                <img src="videos/lunarlandernofoil-carbajal.gif" alt="Lunar" width="100%">
+                                <header>
+                                    <h2>Apollo Lunar Module</h2>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <section class="last">
+                                <img src="videos/sls_block1.gif" alt="Launch System" width="100%">
+                                <header>
+                                    <h2>Space Launch System Block 1</h2>
+                                </header>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Meshes section -->
+                <section id="meshes" class="container">
+                    <h2>3D Meshes</h2>
+                    <div class="row">
+                        <!-- <div class="col-4 col-12-medium">
+                            <model-viewer src="mesh/explorer1.glb" alt="Explorer 1" auto-rotate camera-controls style="width: 100%; height: 400px;"></model-viewer>
+                            <header>
+                                <h2>Explorer 1</h2>
+                            </header>
+                        </div> -->
+                        <!-- <div class="col-4 col-12-medium">
+                            <model-viewer 
+                                src="meshes/explorer1.glb" 
+                                poster="images/explorer1.png" 
+                                style="width: 100%; height: 300px;" 
+                                autoplay 
+                                shadow-intensity="1" 
+                                camera-controls 
+                                touch-action="pan-y">
+                            </model-viewer>
+                            <header>
+                                <h2>Explorer 1</h2>
+                            </header>
+                        </div> -->
+                        <div class="col-4 col-12-medium">
+                            <model-viewer src="mesh/explorer1.glb" alt="Explorer 1" auto-rotatre camera-controls style="width: 100%; height: 400px;"></model-viewer>
+                            <header>
+                                <h2>Explorer 1</h2>
+                            </header>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <model-viewer src="mesh/lunarlandernofoil-carbajal.glb" alt="Apollo Lunar Module" auto-rotate camera-controls style="width: 100%; height: 400px;"></model-viewer>
+                            <header>
+                                <h2>Apollo Lunar Module</h2>
+                            </header>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <model-viewer src="mesh/sls_block1.glb" alt="Space Launch System Block 1" auto-rotate camera-controls style="width: 100%; height: 400px;"></model-viewer>
+                            <header>
+                                <h2>Space Launch System Block 1</h2>
+                            </header>
+                        </div>
+                    </div>
+                </section>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<h2>Menu</h2>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="generic.html">Ipsum veroeros</a></li>
-							<li><a href="generic.html">Tempus etiam</a></li>
-							<li><a href="generic.html">Consequat dolor</a></li>
-							<li><a href="elements.html">Elements</a></li>
-						</ul>
-					</nav>
+                <!-- NEED TO CHANGE -->
+                <section id="image_to_3d" class="container">
+                    <h2>Image-to-3D</h2>
+                    <div class="row">
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                                <img src="i_t_3_images/argo_rgba.png" alt="Explorer" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                                <img src="i_t_3_images/astre_rgba.png" alt="Apollo" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                                <img src="i_t_3_images/curiosity_scarecrow_rover_rgba.png" alt="Launch System" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                                <img src="i_t_3_images/friendship7_rgba.png" alt="Explorer" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                                <img src="i_t_3_images/geotail_rgba.png" alt="Apollo" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                                <img src="i_t_3_images/GPM_rgba.png" alt="Launch System" />
+                            </section>
+                        </div>
+                    </div>
+                    
+                    <style>
+                        .image-item img {
+                          width: 100%;  /* Adjusts the width of the GIFs to fit the column */
+                          height: auto; /* Keeps the aspect ratio intact */
+                          object-fit: contain; /* Ensures the whole GIF is displayed */
+                        }
+                      </style>
+                      
+                    <div class="row">
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                            <img src="i_t_3_vids/argo.gif" alt="Explorer" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                            <img src="i_t_3_vids/astre.gif" alt="Apollo" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                            <img src="i_t_3_vids/curiosity_scarecrow_rover.gif" alt="Launch System" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                            <img src="i_t_3_vids/friendship7.gif" alt="Explorer" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                            <img src="i_t_3_vids/geotail.gif" alt="Apollo" />
+                            </section>
+                        </div>
+                        <div class="col-2 col-6-medium">
+                            <section class="image-item">
+                            <img src="i_t_3_vids/GPM.gif" alt="Launch System" />
+                            </section>
+                        </div>
+                    </div>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<header>
-								<h1>This is Phantom, a free, fully responsive site<br />
-								template designed by <a href="http://html5up.net">HTML5 UP</a>.</h1>
-								<p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
-							</header>
-							<section class="tiles">
-								<article class="style1">
-									<span class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Magna</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="images/pic02.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Lorem</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Feugiat</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style4">
-									<span class="image">
-										<img src="images/pic04.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Tempus</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5">
-									<span class="image">
-										<img src="images/pic05.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Aliquam</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6">
-									<span class="image">
-										<img src="images/pic06.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Veroeros</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="images/pic07.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Ipsum</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="images/pic08.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Dolor</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style1">
-									<span class="image">
-										<img src="images/pic09.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Nullam</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5">
-									<span class="image">
-										<img src="images/pic10.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Ultricies</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6">
-									<span class="image">
-										<img src="images/pic11.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Dictum</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style4">
-									<span class="image">
-										<img src="images/pic12.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Pretium</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-							</section>
-						</div>
-					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<section>
-								<h2>Get in touch</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-							<section>
-								<h2>Follow</h2>
-								<ul class="icons">
-									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
+                    <!-- SECOND row -->
+                    <section id="image_to_3d" class="container">
+                        <div class="row">
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/GRO_rgba.png" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/HESSI_rgba.png" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/HETE_rgba.png" alt="Launch System" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/hubble_rgba.png" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/ibex_rgba.png" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/ingenuity_thumb_rgba.png" alt="Launch System" />
+                                </section>
+                            </div>
+                        </div>
+                        
+                        <style>
+                            .image-item img {
+                              width: 100%;  /* Adjusts the width of the GIFs to fit the column */
+                              height: auto; /* Keeps the aspect ratio intact */
+                              object-fit: contain; /* Ensures the whole GIF is displayed */
+                            }
+                          </style>
+                          
+                        <div class="row">
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/GRO.gif" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/HESSI.gif" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/HETE.gif" alt="Launch System" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/hubble.gif" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/ibex.gif" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/ingenuity_thumb.gif" alt="Launch System" />
+                                </section>
+                            </div>
+                        </div>
 
-			</div>
+                        <!-- THIRD row -->
+                    <section id="image_to_3d" class="container">
+                        <div class="row">
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/InSight_cruise_rgba.png" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/isee_rgba.png" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/oruc_rgba.png" alt="Launch System" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/jpl-vtad-deepimpact_rgba.png" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/jpl-vtad-ds1_rgba.png" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                    <img src="i_t_3_images/jpl-vtad-dsn70_rgba.png" alt="Launch System" />
+                                </section>
+                            </div>
+                        </div>
+                        
+                        <style>
+                            .image-item img {
+                              width: 100%;  /* Adjusts the width of the GIFs to fit the column */
+                              height: auto; /* Keeps the aspect ratio intact */
+                              object-fit: contain; /* Ensures the whole GIF is displayed */
+                            }
+                          </style>
+                          
+                        <div class="row">
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/InSight_cruise.gif" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/isee.gif" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/oruc.gif" alt="Launch System" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/jpl-vtad-deepimpact.gif" alt="Explorer" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/jpl-vtad-ds1.gif" alt="Apollo" />
+                                </section>
+                            </div>
+                            <div class="col-2 col-6-medium">
+                                <section class="image-item">
+                                <img src="i_t_3_vids/jpl-vtad-dsn70.gif" alt="Launch System" />
+                                </section>
+                            </div>
+                        </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                </section>
+                
 
-	</body>
+
+                
+
+        <!-- Footer -->
+        <footer id="footer" style="padding-left: 30px; text-align: left;">
+            <div class="inner">
+                <section>
+                    <h2 style="text-align: left;">Citation</h2>
+                    <pre style="text-align: left;">
+@inproceedings{dreamsat,
+authors={Mathihalli, Nidhi and Wei, Audrey and Lavezzi, Giovanni and Mun Siew, Peng and 
+    Rodriguez-Fernandez, Victor and Urrutxua, Hodei and Linares, Richard},
+year = {2024},
+month = {10},
+pages = {},
+booktitle = {75th International Astronautical Congress 2024},
+publisher={International Astronautical Federation},
+address = {Milan, Italy},
+title={DreamSat: Towards a General 3D Model for Novel View Synthesis of Space Objects}
+}
+                    </pre>
+                </section>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+</body>
 </html>
